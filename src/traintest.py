@@ -180,6 +180,9 @@ def model_building(word_count, voc, ex=0, smooth_factor=0.5, types=['story', 'as
     if ex == 1:
         # write_model_two(words_prob, types, out_path='../task3/ex1', file_path='/stopword-model.txt', file_prettier_path='/stopword-model-prettier.txt')
         write_model(words_prob, out_path='../task3/ex1', file_path='/stopword-model.txt')
+    if ex == 2:
+        # write_model_two(words_prob, types, out_path='../task3/ex2', file_path='/wordlength-model.txt', file_prettier_path='/wordlength-model-prettier.txt')
+        write_model(words_prob, out_path='../task3/ex2', file_path='/wordlength-model.txt')
     return words_prob
 
 
@@ -256,6 +259,10 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         folder_path = '../task3/ex1'
         create_dir(folder_path)
         file_path = folder_path + '/stopword-result.txt'
+    if ex == 2:
+        folder_path = '../task3/ex2'
+        create_dir(folder_path)
+        file_path = folder_path + '/wordlength-result.txt'
     fp = open(file_path, 'w+')
     line_counter = 0
 
@@ -327,6 +334,8 @@ def count_word_by_ex(dataset, ex=0, stop_words=None):
         if ex == 1:
             stop_words = read_stop_word('../dataset/Stopwords.txt')
             title_tokens = generate_tokens_by_stop_words(row['Title'], stop_words)
+        if ex == 2:
+            title_tokens = generate_tokens_by_wordlength(row['Title'])
         # Traverse the title
         for word in title_tokens:
             # Add the word in vocabulary set
@@ -356,6 +365,9 @@ def count_word_by_ex(dataset, ex=0, stop_words=None):
     if ex == 1:
         output_path = '../task3/ex1'
         write_file(output_path, 'stopword-vocabulary.txt', sorted(voc))
+    if ex == 2:
+        output_path = '../task3/ex2'
+        write_file(output_path, 'wordlength-vocabulary.txt', sorted(voc))
     return word_count, sorted(voc), sorted(rmv_word)
 
 
@@ -373,6 +385,20 @@ def generate_tokens_by_stop_words(title, stop_words):
     for word in original_tokens:
         if word not in stop_words and len(word) > 1 and re.search(r'[\w]+', word):
             # Remove the punctuations form two sides
+            for pct in string.punctuation:
+                word = word.strip(pct)
+            tokens.append(word)
+    return tokens
+
+
+def generate_tokens_by_wordlength(title):
+    # Replace curly quote to vertical quote
+    original_tokens = trim_lower_title(title)
+    tokens = []
+    for word in original_tokens:
+        word = word.strip()
+        # Remove all punctuations and single letters
+        if re.search(r'[\w]+', word) and 2 <= len(word) <= 9:
             for pct in string.punctuation:
                 word = word.strip(pct)
             tokens.append(word)
