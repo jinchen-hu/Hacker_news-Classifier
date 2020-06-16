@@ -96,3 +96,26 @@ print('\n\nThe program terminates, total time cost: ' + str(end_time - start_tim
 # plt.ylabel('Accuracy')
 # plt.title("EXPERIMENT 4 RESULTS")
 # plt.show()
+
+# results analysis
+
+# def result_analysis(actual_class, predicted_class, experiment, classes_list):
+#     experiment = experiment.strip()
+#
+#     if experiment == 'exp1' or experiment == 'exp2' or experiment == 'exp3' or experiment == 'exp4' or experiment == 'exp5':
+#         print("experiment:-", experiment)
+#         print("\n")
+#         print("----confusion matrix----")
+#         cm = pd.DataFrame(confusion_matrix(actual_class, predicted_class), columns=classes_list, index=classes_list)
+#         print(cm)
+#         print("\n")
+#         print("----classification report----")
+#         print(classification_report(actual_class, predicted_class, target_names=classes_list))
+#         print("\n")
+#         print("----Accuracy report----")
+#         print(accuracy_score(actual_class, predicted_class))
+#
+#     if experiment == 'exp5' or experiment == 'exp4':
+#         accuracy_diffsmooth.append(accuracy_score(actual_class, predicted_class))
+#
+#     # print("accuracy_diffsmooth",accuracy_diffsmooth)
