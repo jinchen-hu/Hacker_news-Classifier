@@ -73,7 +73,7 @@ def count_word(training_data):
             else:
                 word_map[word] = 1
     return type_map, word_map, voc, rmv_words
-'''
+
 
 
 def count_word(dataset):
@@ -114,7 +114,7 @@ def count_word(dataset):
     write_file(output_path, 'vocabulary.txt', sorted(voc))
     write_file(output_path, 'removed_word.txt', sorted(rmv_word))
     return word_count, sorted(voc), sorted(rmv_word)
-
+'''
 
 def compute_type_log(dataset):
     type_count = {}
@@ -263,9 +263,10 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         folder_path = '../task3/ex2'
         create_dir(folder_path)
         file_path = folder_path + '/wordlength-result.txt'
+
     fp = open(file_path, 'w+')
     line_counter = 0
-
+    success_count = 0
     # Manipulate testing dataset
     for index, row in testing_data.iterrows():
         line_counter += 1
@@ -304,8 +305,11 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         for i in range(lent):
             fp.write(str(scores[i]) + '  ')
         fp.write(real_type + '  ')
+        if classifier_type == real_type:
+            success_count += 1
         fp.write(str(classifier_type == real_type) + '\n')
     print(file_path + ' has been created successfully')
+    return success_count
 
 
 def read_stop_word(file_path):
@@ -336,6 +340,8 @@ def count_word_by_ex(dataset, ex=0, stop_words=None):
             title_tokens = generate_tokens_by_stop_words(row['Title'], stop_words)
         if ex == 2:
             title_tokens = generate_tokens_by_wordlength(row['Title'])
+        if ex == 3:
+            title_tokens = generate_tokens_by_stop_words(row['Title'], stop_words)
         # Traverse the title
         for word in title_tokens:
             # Add the word in vocabulary set
@@ -403,3 +409,35 @@ def generate_tokens_by_wordlength(title):
                 word = word.strip(pct)
             tokens.append(word)
     return tokens
+
+
+def sum_total_freq(word_prob):
+    total_freq = {}
+    for word, freq_prob in word_prob.items():
+        # Extract the first row
+        ls = list(np.array(freq_prob)[:, 0])
+        # Sum the frequency
+        total_freq[word] = sum([int(i) for i in ls])
+    return total_freq
+
+
+def remove_words_by_filter(total_freq, filter_factor, word_prob_length = 5000):
+    removed_words = []
+    if filter_factor.isdigit():
+        filter_facotr = int(filter_factor)
+        for word, freq in total_freq.items():
+            if freq <= filter_facotr:
+                removed_words.append(word)
+    else:
+        filter_factor = int(filter_factor[:-1])
+        # Sort the total_freq by the orter of descending
+        total_freq_list = sorted(total_freq.items(), key=lambda kv: kv[1], reverse=True)
+        # Get the frequency last word that needs to be removed
+        target_num = total_freq_list[int(filter_factor / 100 * word_prob_length)][1]
+        for word, freq in total_freq.items():
+            if freq >= target_num:
+                removed_words.append(word)
+    return removed_words
+
+
+
