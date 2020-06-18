@@ -1,6 +1,5 @@
 import traintest as tt
 import time
-import numpy as np
 
 
 def costing_time(start, mid, end):
@@ -12,16 +11,20 @@ def costing_time(start, mid, end):
 
 def run(file_path, filter_list=None):
     training_dataset, testing_dataset = tt.generate_dataset(file_path)
-    total_testing = len(testing_dataset)
+    results, word_left_count = [], []
+    # total_testing = len(testing_dataset)
     print('=================================================================')
     print('Baseline experiment is starting...')
     start = time.process_time()
-    word_count, voc, _ = tt.count_word_by_ex(training_dataset, 0)
-    word_prob_t1 = tt.model_building(word_count, voc, 0)
+    word_count, voc,_, types = tt.count_word_by_ex(training_dataset, 0)
+    word_left_count.append(len(voc))
+
+    word_prob_t1 = tt.model_building(word_count, voc, 0, 0.5, types)
     t1_time = time.process_time()
 
-    success = tt.compute_score(training_dataset, testing_dataset, word_prob_t1, voc, 0)
-    print('\n***Performance: ' + str(success / total_testing * 100) + '%\n')
+    real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob_t1, voc, 0, types)
+    result = tt.result_analysis(real_class, pred_class)
+    results.append(result)
 
     t2_time = time.process_time()
     costing_time(start, t1_time, t2_time)
@@ -34,12 +37,11 @@ def run(file_path, filter_list=None):
             print('Wordlength experiment is starting...')
 
         start = time.process_time()
-        word_count, voc, _ = tt.count_word_by_ex(training_dataset, ex)
-        word_prob = tt.model_building(word_count, voc, ex)
+        word_count, voc, _, types = tt.count_word_by_ex(training_dataset, ex)
+        word_prob = tt.model_building(word_count, voc, ex, types=types)
         t1_time = time.process_time()
 
-        success = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, ex)
-        print('\n***Performance: ' + str(success / total_testing *100) + '%\n')
+        tt.compute_score(training_dataset, testing_dataset, word_prob, voc, ex, types)
 
         t2_time = time.process_time()
         costing_time(start, t1_time, t2_time)
@@ -48,38 +50,37 @@ def run(file_path, filter_list=None):
         print('=================================================================')
         print('Infrequent word filtering experiment is starting...\n')
         total_freq = tt.sum_total_freq(word_prob_t1)
-        word_prob_t1_length = len(word_prob_t1)
-        success_count = []
-        word_left_count = []
+        voc_length = word_left_count[0]
+
         for filt in filter_list:
             if filt.isdigit():
                 print('Remove the word with frequency = ' + str(filt) + '\n')
             else:
                 print('Remove the top ' + str(filt) + ' most frequency words\n')
-            rmv_words = tt.remove_words_by_filter(total_freq, filt, word_prob_t1_length)
+            rmv_words = tt.remove_words_by_filter(total_freq, filt, voc_length)
 
             start = time.process_time()
-            word_count, voc, _ = tt.count_word_by_ex(training_dataset, 3, rmv_words)
+            word_count, voc, _, types = tt.count_word_by_ex(training_dataset, 3, rmv_words)
             word_left_count.append(len(voc))
 
-            word_prob = tt.model_building(word_count, voc)
+            word_prob = tt.model_building(word_count, voc, 3, types=types)
 
             t1_time = time.process_time()
 
-            success = tt.compute_score(training_dataset, testing_dataset, word_prob, voc)
-            success_count.append(success / total_testing)
-            print('\n***Performance: ' + str(success / total_testing * 100) + '%\n')
+            real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, 3, types)
+            result = tt.result_analysis(real_class, pred_class)
+            results.append(result)
 
             t2_time = time.process_time()
             costing_time(start, t1_time, t2_time)
-        print(word_left_count)
-        print(success_count)
+    print(word_left_count)
+    print(results)
 
 
 start_time = time.process_time()
 print('\n\nThe program is running\n\n')
 
-DATA_FILE_PATH = '../dataset/hns_2018_2019.csv'
+DATA_FILE_PATH = '../dataset/test.csv'
 FILTER_LIST = ['1', '5', '10', '15', '20', '5%', '10%', '15%', '20%', '25%']
 
 run(DATA_FILE_PATH, FILTER_LIST)
@@ -97,25 +98,4 @@ print('\n\nThe program terminates, total time cost: ' + str(end_time - start_tim
 # plt.title("EXPERIMENT 4 RESULTS")
 # plt.show()
 
-# results analysis
 
-# def result_analysis(actual_class, predicted_class, experiment, classes_list):
-#     experiment = experiment.strip()
-#
-#     if experiment == 'exp1' or experiment == 'exp2' or experiment == 'exp3' or experiment == 'exp4' or experiment == 'exp5':
-#         print("experiment:-", experiment)
-#         print("\n")
-#         print("----confusion matrix----")
-#         cm = pd.DataFrame(confusion_matrix(actual_class, predicted_class), columns=classes_list, index=classes_list)
-#         print(cm)
-#         print("\n")
-#         print("----classification report----")
-#         print(classification_report(actual_class, predicted_class, target_names=classes_list))
-#         print("\n")
-#         print("----Accuracy report----")
-#         print(accuracy_score(actual_class, predicted_class))
-#
-#     if experiment == 'exp5' or experiment == 'exp4':
-#         accuracy_diffsmooth.append(accuracy_score(actual_class, predicted_class))
-#
-#     # print("accuracy_diffsmooth",accuracy_diffsmooth)

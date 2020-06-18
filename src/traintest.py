@@ -5,6 +5,7 @@ import os
 import re
 import math
 import numpy as np
+from sklearn import metrics
 nltk.download('punkt')
 
 
@@ -15,7 +16,7 @@ def create_dir(path):
 
 def generate_dataset(data_file_path):
     # Define the path of data set
-    data_file_path = '../dataset/hns_2018_2019.csv'
+    # data_file_path = '../dataset/hns_2018_2019.csv'
     # Read the data as DataFrame type, use 'Created At' as row labels/indices,
     # extract columns 'Title', 'Post Type', and 'Created At',
     data = pds.read_csv(data_file_path,
@@ -175,13 +176,13 @@ def model_building(word_count, voc, ex=0, smooth_factor=0.5, types=['story', 'as
                 # Append the list of freq and prob to the list
                 words_prob[word].append(word_count[types[i]][word])
     if ex == 0:
-        # write_model_two(words_prob, types, out_path='../task1', file_path='/model-2018.txt', file_prettier_path='/model-prettier.txt')
+        write_model_two(words_prob, types, out_path='../task1', file_path='/model-2018.txt', file_prettier_path='/model-prettier.txt')
         write_model(words_prob, out_path='../task1', file_path='/model-2018.txt')
     if ex == 1:
-        # write_model_two(words_prob, types, out_path='../task3/ex1', file_path='/stopword-model.txt', file_prettier_path='/stopword-model-prettier.txt')
+        write_model_two(words_prob, types, out_path='../task3/ex1', file_path='/stopword-model.txt', file_prettier_path='/stopword-model-prettier.txt')
         write_model(words_prob, out_path='../task3/ex1', file_path='/stopword-model.txt')
     if ex == 2:
-        # write_model_two(words_prob, types, out_path='../task3/ex2', file_path='/wordlength-model.txt', file_prettier_path='/wordlength-model-prettier.txt')
+        write_model_two(words_prob, types, out_path='../task3/ex2', file_path='/wordlength-model.txt', file_prettier_path='/wordlength-model-prettier.txt')
         write_model(words_prob, out_path='../task3/ex2', file_path='/wordlength-model.txt')
     return words_prob
 
@@ -250,7 +251,7 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         log_values[word] = {}
         for i in range(lent):
             log_values[word][types[i]] = math.log10(float(words_prob[word][i][1]))
-    file_path = ''
+    file_path, fp = '', ''
     if ex == 0:
         folder_path = '../task2'
         create_dir(folder_path)
@@ -263,10 +264,10 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         folder_path = '../task3/ex2'
         create_dir(folder_path)
         file_path = folder_path + '/wordlength-result.txt'
-
-    fp = open(file_path, 'w+')
+    if ex != 3:
+        fp = open(file_path, 'w+')
     line_counter = 0
-    success_count = 0
+    real_class, pred_class = [],[]
     # Manipulate testing dataset
     for index, row in testing_data.iterrows():
         line_counter += 1
@@ -298,18 +299,19 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
                     scores[i] += log_values[word][types[i]]
 
         classifier_type = types[scores.index(max(scores))]
+        if ex != 3:
+            fp.write(str(line_counter) + '  ')
+            fp.write(original_title + '  ')
+            fp.write(classifier_type + '  ')
+            for i in range(lent):
+                fp.write(str(scores[i]) + '  ')
+            fp.write(real_type + '  ')
+            fp.write(str(classifier_type == real_type) + '\n')
 
-        fp.write(str(line_counter) + '  ')
-        fp.write(original_title + '  ')
-        fp.write(classifier_type + '  ')
-        for i in range(lent):
-            fp.write(str(scores[i]) + '  ')
-        fp.write(real_type + '  ')
-        if classifier_type == real_type:
-            success_count += 1
-        fp.write(str(classifier_type == real_type) + '\n')
+        real_class.append(real_type)
+        pred_class.append(classifier_type)
     print(file_path + ' has been created successfully')
-    return success_count
+    return real_class, pred_class
 
 
 def read_stop_word(file_path):
@@ -374,7 +376,7 @@ def count_word_by_ex(dataset, ex=0, stop_words=None):
     if ex == 2:
         output_path = '../task3/ex2'
         write_file(output_path, 'wordlength-vocabulary.txt', sorted(voc))
-    return word_count, sorted(voc), sorted(rmv_word)
+    return word_count, sorted(voc), sorted(rmv_word), list(types)
 
 
 def trim_lower_title(title):
@@ -421,7 +423,7 @@ def sum_total_freq(word_prob):
     return total_freq
 
 
-def remove_words_by_filter(total_freq, filter_factor, word_prob_length = 5000):
+def remove_words_by_filter(total_freq, filter_factor, word_prob_length=5000):
     removed_words = []
     if filter_factor.isdigit():
         filter_facotr = int(filter_factor)
@@ -440,4 +442,37 @@ def remove_words_by_filter(total_freq, filter_factor, word_prob_length = 5000):
     return removed_words
 
 
+def result_analysis(real_class, pred_class):
+    # Compute accuracy score
+    # accuracy = metrics.accuracy_score(real_class, pred_class)
+    # Compute f1 -score
+    # f1_score = metrics.f1_score(real_class, pred_class, average='weighted')
+    # Compute precision, recall
+    precision, recall, f1, _ = metrics.precision_recall_fscore_support(real_class, pred_class, average='weighted', zero_division=0)
+    print('Precision: ' + str(precision))
+    print('Recall: ' + str(recall))
+    print('F1 score: ' + str(f1))
+    return precision, recall, f1
 
+
+# def stats_plot():
+#     plt.figure(figsize=(20, 10))
+#     plt.subplot(121)
+#     plt.plot(x1, y11, 'o-b', label='precision')
+#     plt.plot(x1, y12, '*-r', label='recall')
+#     plt.plot(x1, y13, 'x-m', label='f1-measure')
+#     plt.legend(loc=(0, -0.28), prop=dict(size=20))
+#     plt.title('test')
+#     plt.xlabel('x')
+#     plt.ylabel('y')
+#
+#     plt.subplot(122)
+#     plt.plot(x2, y21, 'o-b', label='precision')
+#     plt.plot(x2, y22, '*-r', label='recall')
+#     plt.plot(x2, y23, 'x-m', label='f1-measure')
+#     plt.legend(loc=(0, -0.28), prop=dict(size=20))
+#     plt.title('t2')
+#     plt.xlabel('x')
+#     plt.ylabel('y')
+#
+#     plt.show()
