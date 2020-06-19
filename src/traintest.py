@@ -1,4 +1,6 @@
 import pandas as pds
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 import nltk
 import string
 import os
@@ -6,7 +8,9 @@ import re
 import math
 import numpy as np
 from sklearn import metrics
+import matplotlib.pyplot as plt
 nltk.download('punkt')
+nltk.download('stopwords')
 
 
 def create_dir(path):
@@ -33,10 +37,12 @@ def generate_tokens(title, rmv_words):
     # Replace curly quote to vertical quote
     original_tokens = trim_lower_title(title)
     tokens = []
+    lemmatizer = WordNetLemmatizer()
+
     for word in original_tokens:
         word = word.strip()
         # Remove all punctuations and single letters
-        if re.search(r'[\w]+', word) and len(word) > 1:
+        if re.search(r'[\w]+', word) and len(word) > 1 and word not in stopwords.words('english'):
             for pct in string.punctuation:
                 word = word.strip(pct)
             tokens.append(word)
@@ -391,7 +397,7 @@ def generate_tokens_by_stop_words(title, stop_words):
     original_tokens = trim_lower_title(title)
     tokens = []
     for word in original_tokens:
-        if word not in stop_words and len(word) > 1 and re.search(r'[\w]+', word):
+        if word not in stop_words and len(word) > 1 and re.search(r'[\w]+', word) and word not in stopwords.words('english'):
             # Remove the punctuations form two sides
             for pct in string.punctuation:
                 word = word.strip(pct)
@@ -406,7 +412,7 @@ def generate_tokens_by_wordlength(title):
     for word in original_tokens:
         word = word.strip()
         # Remove all punctuations and single letters
-        if re.search(r'[\w]+', word) and 2 <= len(word) <= 9:
+        if re.search(r'[\w]+', word) and 2 <= len(word) <= 9 and word not in stopwords.words('english'):
             for pct in string.punctuation:
                 word = word.strip(pct)
             tokens.append(word)
@@ -455,24 +461,37 @@ def result_analysis(real_class, pred_class):
     return precision, recall, f1
 
 
-# def stats_plot():
-#     plt.figure(figsize=(20, 10))
-#     plt.subplot(121)
-#     plt.plot(x1, y11, 'o-b', label='precision')
-#     plt.plot(x1, y12, '*-r', label='recall')
-#     plt.plot(x1, y13, 'x-m', label='f1-measure')
-#     plt.legend(loc=(0, -0.28), prop=dict(size=20))
-#     plt.title('test')
-#     plt.xlabel('x')
-#     plt.ylabel('y')
-#
-#     plt.subplot(122)
-#     plt.plot(x2, y21, 'o-b', label='precision')
-#     plt.plot(x2, y22, '*-r', label='recall')
-#     plt.plot(x2, y23, 'x-m', label='f1-measure')
-#     plt.legend(loc=(0, -0.28), prop=dict(size=20))
-#     plt.title('t2')
-#     plt.xlabel('x')
-#     plt.ylabel('y')
-#
-#     plt.show()
+def stats_plot(x0, x, y0, y):
+    lentx = int(len(x)/2)
+    x1 = x0 + x[:lentx]
+    x2 = x0 + x[lentx:]
+    lenty = int(len(x)/2)
+    y1 = y0 + y[:lenty]
+    y2 = y0 + y[lenty:]
+
+    y11 = list(np.array(y1)[:, 0])
+    y12 = list(np.array(y1)[:, 1])
+    y13 = list(np.array(y1)[:, 2])
+
+    y21 = list(np.array(y2)[:, 0])
+    y22 = list(np.array(y2)[:, 1])
+    y23 = list(np.array(y2)[:, 2])
+
+    plt.figure(figsize=(20, 10))
+    plt.subplot(121)
+    plt.plot(x1, y11, 'o-b', label='precision')
+    plt.plot(x1, y12, '*-r', label='recall')
+    plt.plot(x1, y13, 'x-m', label='f1-measure')
+    plt.legend(loc=(0, -0.28), prop=dict(size=20))
+    plt.title('test')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.subplot(122)
+    plt.plot(x2, y21, 'o-b', label='precision')
+    plt.plot(x2, y22, '*-r', label='recall')
+    plt.plot(x2, y23, 'x-m', label='f1-measure')
+    plt.legend(loc=(0, -0.28), prop=dict(size=20))
+    plt.title('t2')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.show()

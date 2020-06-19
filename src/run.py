@@ -17,14 +17,13 @@ def run(file_path, filter_list=None):
     print('Baseline experiment is starting...')
     start = time.process_time()
     word_count, voc,_, types = tt.count_word_by_ex(training_dataset, 0)
-    word_left_count.append(len(voc))
+    baseline_left = len(voc)
 
     word_prob_t1 = tt.model_building(word_count, voc, 0, 0.5, types)
     t1_time = time.process_time()
 
     real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob_t1, voc, 0, types)
-    result = tt.result_analysis(real_class, pred_class)
-    results.append(result)
+    baseline_result = tt.result_analysis(real_class, pred_class)
 
     t2_time = time.process_time()
     costing_time(start, t1_time, t2_time)
@@ -50,7 +49,7 @@ def run(file_path, filter_list=None):
         print('=================================================================')
         print('Infrequent word filtering experiment is starting...\n')
         total_freq = tt.sum_total_freq(word_prob_t1)
-        voc_length = word_left_count[0]
+        voc_length = baseline_left
 
         for filt in filter_list:
             if filt.isdigit():
@@ -73,8 +72,11 @@ def run(file_path, filter_list=None):
 
             t2_time = time.process_time()
             costing_time(start, t1_time, t2_time)
+    print(baseline_left, baseline_result)
     print(word_left_count)
     print(results)
+    tt.stats_plot([baseline_left], word_left_count, [baseline_result], list(results))
+    return [baseline_left], word_left_count, list(baseline_result), results
 
 
 start_time = time.process_time()
@@ -83,7 +85,8 @@ print('\n\nThe program is running\n\n')
 DATA_FILE_PATH = '../dataset/test.csv'
 FILTER_LIST = ['1', '5', '10', '15', '20', '5%', '10%', '15%', '20%', '25%']
 
-run(DATA_FILE_PATH, FILTER_LIST)
+X00, X, Y00, Y = run(DATA_FILE_PATH, FILTER_LIST)
+
 
 end_time = time.process_time()
 
