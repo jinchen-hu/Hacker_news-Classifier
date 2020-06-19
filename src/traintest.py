@@ -37,7 +37,7 @@ def generate_tokens(title, rmv_words):
     # Replace curly quote to vertical quote
     original_tokens = trim_lower_title(title)
     tokens = []
-    lemmatizer = WordNetLemmatizer()
+    # lemmatizer = WordNetLemmatizer()
 
     for word in original_tokens:
         word = word.strip()
@@ -150,7 +150,7 @@ def total_words_types(word_count):
 def write_file(folder_path, file_path, data):
     create_dir(folder_path)
     file_path = folder_path + "/" + file_path
-    fp = open(file_path, 'w+')
+    fp = open(file_path, 'w+', encoding='utf-8')
     for i in range(len(data)):
         fp.write(data[i] + '\n')
     fp.close()
@@ -197,8 +197,8 @@ def write_model_two(words_prob, types, out_path, file_path, file_prettier_path):
     create_dir(out_path)
     file_path = out_path + file_path
     file_prettier_path = out_path + file_prettier_path
-    fp = open(file_path, 'w+')
-    fp_prettier = open(file_prettier_path, 'w+')
+    fp = open(file_path, 'w+', encoding='utf-8')
+    fp_prettier = open(file_prettier_path, 'w+', encoding='utf-8')
     line_counter = 1
     # words_prob = sorted(words_prob)
     for word in sorted(words_prob):
@@ -226,7 +226,7 @@ def write_model_two(words_prob, types, out_path, file_path, file_prettier_path):
 def write_model(words_prob, out_path, file_path):
     create_dir(out_path)
     file_path = out_path + file_path
-    fp = open(file_path, 'w+')
+    fp = open(file_path, 'w+', encoding='utf-8')
     line_counter = 1
     # words_prob = sorted(words_prob)
     for word in sorted(words_prob):
@@ -271,7 +271,7 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
         create_dir(folder_path)
         file_path = folder_path + '/wordlength-result.txt'
     if ex != 3:
-        fp = open(file_path, 'w+')
+        fp = open(file_path, 'w+', encoding='utf-8')
     line_counter = 0
     real_class, pred_class = [],[]
     # Manipulate testing dataset
@@ -321,7 +321,7 @@ def compute_score(training_data, testing_data, words_prob, voc, ex=0, types=['st
 
 
 def read_stop_word(file_path):
-    fp = open(file_path, 'r+', encoding='UTF-8')
+    fp = open(file_path, 'r+', encoding='utf-8')
     stop_word = fp.read().replace("'", "")
     stop_word = stop_word.replace("’", "")
     stop_word.lower()
@@ -448,13 +448,14 @@ def remove_words_by_filter(total_freq, filter_factor, word_prob_length=5000):
     return removed_words
 
 
-def result_analysis(real_class, pred_class):
+def result_analysis(real_class, pred_class, types):
     # Compute accuracy score
     # accuracy = metrics.accuracy_score(real_class, pred_class)
     # Compute f1 -score
     # f1_score = metrics.f1_score(real_class, pred_class, average='weighted')
     # Compute precision, recall
     precision, recall, f1, _ = metrics.precision_recall_fscore_support(real_class, pred_class, average='weighted', zero_division=0)
+    print(metrics.classification_report(real_class, pred_class, target_names=types, zero_division=0))
     print('Precision: ' + str(precision))
     print('Recall: ' + str(recall))
     print('F1 score: ' + str(f1))
@@ -477,21 +478,27 @@ def stats_plot(x0, x, y0, y):
     y22 = list(np.array(y2)[:, 1])
     y23 = list(np.array(y2)[:, 2])
 
-    plt.figure(figsize=(20, 10))
+    plt.figure(figsize=(30, 15))
     plt.subplot(121)
     plt.plot(x1, y11, 'o-b', label='precision')
     plt.plot(x1, y12, '*-r', label='recall')
     plt.plot(x1, y13, 'x-m', label='f1-measure')
-    plt.legend(loc=(0, -0.28), prop=dict(size=20))
-    plt.title('test')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    # plt.legend(loc=(0, -0.28), prop=dict(size=15))
+    plt.legend(loc='lower right', prop=dict(size=15))
+    plt.title('Experiment by Frequency')
+    plt.xlabel('Number of words remaining in vocab')
+    plt.ylabel('Accuracy')
+
     plt.subplot(122)
     plt.plot(x2, y21, 'o-b', label='precision')
     plt.plot(x2, y22, '*-r', label='recall')
     plt.plot(x2, y23, 'x-m', label='f1-measure')
-    plt.legend(loc=(0, -0.28), prop=dict(size=20))
-    plt.title('t2')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    #plt.legend(loc=(0, -0.28), prop=dict(size=15))
+    plt.legend(loc='lower right', prop=dict(size=15))
+    plt.title('Experiment by Proportion')
+    plt.xlabel('Number of words remaining in vocab')
+    plt.ylabel('Accuracy')
+    folder_path = '../task3/ex3'
+    create_dir(folder_path)
+    plt.savefig(folder_path+'/stats.png')
     plt.show()

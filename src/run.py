@@ -23,7 +23,7 @@ def run(file_path, filter_list=None):
     t1_time = time.process_time()
 
     real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob_t1, voc, 0, types)
-    baseline_result = tt.result_analysis(real_class, pred_class)
+    baseline_result = tt.result_analysis(real_class, pred_class, types)
 
     t2_time = time.process_time()
     costing_time(start, t1_time, t2_time)
@@ -40,8 +40,8 @@ def run(file_path, filter_list=None):
         word_prob = tt.model_building(word_count, voc, ex, types=types)
         t1_time = time.process_time()
 
-        tt.compute_score(training_dataset, testing_dataset, word_prob, voc, ex, types)
-
+        real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, ex, types)
+        tt.result_analysis(real_class, pred_class, types)
         t2_time = time.process_time()
         costing_time(start, t1_time, t2_time)
 
@@ -67,7 +67,7 @@ def run(file_path, filter_list=None):
             t1_time = time.process_time()
 
             real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, 3, types)
-            result = tt.result_analysis(real_class, pred_class)
+            result = tt.result_analysis(real_class, pred_class, types)
             results.append(result)
 
             t2_time = time.process_time()
@@ -82,7 +82,7 @@ def run(file_path, filter_list=None):
 start_time = time.process_time()
 print('\n\nThe program is running\n\n')
 
-DATA_FILE_PATH = '../dataset/test.csv'
+DATA_FILE_PATH = '../dataset/hns_test.csv'
 FILTER_LIST = ['1', '5', '10', '15', '20', '5%', '10%', '15%', '20%', '25%']
 
 X00, X, Y00, Y = run(DATA_FILE_PATH, FILTER_LIST)
@@ -92,13 +92,5 @@ end_time = time.process_time()
 
 print('\n\nThe program terminates, total time cost: ' + str(end_time - start_time) + 's')
 
-# print("Remaining words in Vocab: \n", new_vocab_len)
-# print("Accuracy: \n", accuracy_diffsmooth)
-# plt.style.use('ggplot')
-# plt.plot(new_vocab_len, accuracy_diffsmooth, linestyle='--', marker='o', color='b')
-# plt.xlabel('Number of words remaining in vocab')
-# plt.ylabel('Accuracy')
-# plt.title("EXPERIMENT 4 RESULTS")
-# plt.show()
 
 
