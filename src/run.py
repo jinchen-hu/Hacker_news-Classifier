@@ -10,19 +10,25 @@ def costing_time(start, mid, end):
 
 
 def run(file_path, filter_list=None):
-    training_dataset, testing_dataset = tt.generate_dataset(file_path)
+    training_dataset, testing_dataset, type_count = tt.generate_dataset(file_path)
+    types = list(type_count.keys())
     results, word_left_count = [], []
     # total_testing = len(testing_dataset)
     print('=================================================================')
     print('Baseline experiment is starting...')
     start = time.process_time()
-    word_count, voc,_, types = tt.count_word_by_ex(training_dataset, 0)
+    '''
+        word_count: {type_name: {word: word_freq}}
+        voc: vocabulary sorting by alphabetically
+        voc_count: {word: word_freq} in vocabulary
+    '''
+    word_count, voc, voc_count = tt.count_word_by_ex(training_dataset, 0)
     baseline_left = len(voc)
 
-    word_prob_t1 = tt.model_building(word_count, voc, 0, 0.5, types)
+    word_prob_t1 = tt.model_building(word_count, voc, types, 0, 0.5 )
     t1_time = time.process_time()
 
-    real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob_t1, voc, 0, types)
+    real_class, pred_class = tt.compute_score(type_count, testing_dataset, word_prob_t1, voc, types, 0)
     baseline_result = tt.result_analysis(real_class, pred_class, types)
 
     t2_time = time.process_time()
@@ -36,11 +42,11 @@ def run(file_path, filter_list=None):
             print('Wordlength experiment is starting...')
 
         start = time.process_time()
-        word_count, voc, _, types = tt.count_word_by_ex(training_dataset, ex)
-        word_prob = tt.model_building(word_count, voc, ex, types=types)
+        word_count, voc, _ = tt.count_word_by_ex(training_dataset, ex)
+        word_prob = tt.model_building(word_count, voc, types, ex)
         t1_time = time.process_time()
 
-        real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, ex, types)
+        real_class, pred_class = tt.compute_score(type_count, testing_dataset, word_prob, voc, types, ex)
         tt.result_analysis(real_class, pred_class, types)
         t2_time = time.process_time()
         costing_time(start, t1_time, t2_time)
@@ -48,7 +54,7 @@ def run(file_path, filter_list=None):
     if filter_list:
         print('=================================================================')
         print('Infrequent word filtering experiment is starting...\n')
-        total_freq = tt.sum_total_freq(word_prob_t1)
+        # total_freq = tt.sum_total_freq(word_prob_t1)
         voc_length = baseline_left
 
         for filt in filter_list:
@@ -56,17 +62,17 @@ def run(file_path, filter_list=None):
                 print('Remove the word with frequency = ' + str(filt) + '\n')
             else:
                 print('Remove the top ' + str(filt) + ' most frequency words\n')
-            rmv_words = tt.remove_words_by_filter(total_freq, filt, voc_length)
+            rmv_words = tt.remove_words_by_filter(voc_count, filt, voc_length)
 
             start = time.process_time()
-            word_count, voc, _, types = tt.count_word_by_ex(training_dataset, 3, rmv_words)
+            word_count, voc, _ = tt.count_word_by_ex(training_dataset, 3, rmv_words)
             word_left_count.append(len(voc))
 
-            word_prob = tt.model_building(word_count, voc, 3, types=types)
+            word_prob = tt.model_building(word_count, voc, types, 3)
 
             t1_time = time.process_time()
 
-            real_class, pred_class = tt.compute_score(training_dataset, testing_dataset, word_prob, voc, 3, types)
+            real_class, pred_class = tt.compute_score(type_count, testing_dataset, word_prob, voc, types, 3)
             result = tt.result_analysis(real_class, pred_class, types)
             results.append(result)
 
@@ -91,6 +97,4 @@ X00, X, Y00, Y = run(DATA_FILE_PATH, FILTER_LIST)
 end_time = time.process_time()
 
 print('\n\nThe program terminates, total time cost: ' + str(end_time - start_time) + 's')
-
-
 

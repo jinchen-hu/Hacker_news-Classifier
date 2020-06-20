@@ -1,0 +1,100 @@
+1  Competitio.us: track your competitors online  story  22.756135506512507  22.245651570481364  22.683330858737186  22.302770629445433  story  True
+2  Scoble: Google web apps &#34;will sneak in the back door&#34;  story  20.734119747412112  19.968424477908822  19.88954046275471  19.605541258890867  story  True
+3  An alternative to VC: &#34;Selling In&#34;  ask_hn  22.279014327939137  22.72277290742746  22.206209604017523  22.302770629445433  story  False
+4  Yahoo's Growth Being Eroded by New Rivals - New York Times  story  16.468239494824225  13.982606281925456  15.51503449609861  14.211082517781735  story  True
+5  Coghead Goes Live: Build Applications Visually  poll  22.279014327939137  22.245651570481364  22.206209604017523  22.779891884165096  story  False
+6  Rentometer: Check How Your Rent Compares to Others in Your Area  show_hn  22.279014327939137  22.245651570481364  22.683330858737186  22.302770629445433  story  False
+7  Another audience-driven news site that thinks it will win by paying users   poll  17.31416416239078  17.214076048390186  17.31759881638859  17.385433143055963  story  False
+8  Preezo Enters Online Office Race  story  22.756135506512507  22.245651570481364  22.683330858737186  22.302770629445433  story  True
+9  Boston VCs invest in fewer consumer Internet startups than Silicon Valley firms  story  20.734119747412112  19.968424477908822  19.412419208035047  19.605541258890867  story  True
+10  How Much Money Do You Make?  ask_hn  22.279014327939137  22.72277290742746  22.206209604017523  22.302770629445433  story  False
+11  Winners and Losers in the Google YouTube deal  story  18.967376508644282  16.736954711444092  16.61862881205257  16.9083118883363  story  True
+12  Top ten geek business myths  story  22.756135506512507  22.245651570481364  22.206209604017523  22.302770629445433  story  True
+13  The PayPerPost Virus Spreads  story  25  25  25  25  story  True
+14  RealTravel Trip Planner: Cut, Paste & Share Travel Tips  poll  22.279014327939137  22.72277290742746  22.206209604017523  22.779891884165096  story  False
+15  Cyberface: New technology that &#34;captures the soul&#34;  show_hn  22.977984240899605  22.245651570481364  23.05130764403178  22.302770629445433  story  False
+16  Black triangle: a useful shorthand and metaphor  story  25  25  25  25  story  True
+17  NYT: How Friendster Blew It  story  25  25  25  25  story  True
+18  NYT on the network of ex-PayPal employees in Silicon Valley  story  20.512271013025014  19.491303140962728  19.412419208035047  19.605541258890867  story  True
+19  VCs Prefer to Fund Nearby Firms - New York Times  story  18.49025525392462  16.736954711444092  17.463726852066827  16.9083118883363  story  True
+20  Productivity Surges During Reddit Downtime  story  25  25  25  25  story  True
+21  From Oxford to Silicon Valley  story  22.756135506512507  22.245651570481364  22.206209604017523  22.302770629445433  story  True
+22  Y Europe can seed growth of its new stars  show_hn  22.977984240899605  22.245651570481364  23.05130764403178  22.302770629445433  story  False
+23  Adobe gives new flash tools only to Photobucket  show_hn  20.256998568838746  19.968424477908822  20.257517248049304  19.605541258890867  story  False
+24  New Revenue Stream For Bloggers: TextMark SMS Alerts  show_hn  17.536012896777883  17.214076048390186  17.94084810678649  16.9083118883363  story  False
+25  Startup School 2007: 3/24 at Stanford  poll  22.279014327939137  22.72277290742746  22.206209604017523  23.147868700356643  story  False
+26  Ask HN: what software do you use for analyzing apache logs?  ask_hn  17.31416416239078  20.152095247440222  18.34290469184699  17.385433143055963  ask_hn  True
+27  Ask HN: What sorts of theory work best in practice for you?  ask_hn  17.31416416239078  20.152095247440222  18.34290469184699  17.385433143055963  ask_hn  True
+28  Ask HN: How long will it take, while Micro$oft starts to work on Unix based OS?  ask_hn  19.558028655878275  22.906443676958858  21.136695087829466  20.08266251361053  ask_hn  True
+29  Ask HN: What was an idea or concept that made sense to you only after a small epiphany?  ask_hn  17.31416416239078  20.152095247440222  18.34290469184699  17.385433143055963  ask_hn  True
+30  Ask HN: Good online link checker?  ask_hn  17.31416416239078  20.152095247440222  18.820025946566652  17.385433143055963  ask_hn  True
+31  Ask HN on: Controlling trolling  ask_hn  16.837042983817412  20.152095247440222  18.34290469184699  17.862554397775625  ask_hn  True
+32  Ask HN: Lead generation? (consulting)  ask_hn  16.837042983817412  20.629216584386317  18.34290469184699  17.385433143055963  ask_hn  True
+33  Ask HN: If you had a chance to rebuild the internet, what would you change?  ask_hn  19.558028655878275  22.906443676958858  21.136695087829466  20.08266251361053  ask_hn  True
+34  Ask HN: American web working abroad  ask_hn  17.31416416239078  20.629216584386317  18.820025946566652  17.385433143055963  ask_hn  True
+35  Ask HN: reverse drm and user-contributed content : ideas & experiences?  ask_hn  19.558028655878275  22.906443676958858  21.136695087829466  20.08266251361053  ask_hn  True
+36  Ask HN: Proto-hacker looking for a startup job  ask_hn  14.11605731175655  17.87486815486768  15.549114295864515  16.010423098132268  ask_hn  True
+37  Ask HN: Legality of RSS Feed Usage in Web Apps?  ask_hn  17.31416416239078  20.629216584386317  18.820025946566652  17.385433143055963  ask_hn  True
+38  Ask HN: How to choose a name for a web app?  ask_hn  14.59317849032992  17.87486815486768  16.871333590598432  14.688203772501398  ask_hn  True
+39  Ask HN: One page site/app + advertising revenue?  ask_hn  11.39507163969569  15.120519725349045  14.077543194615957  11.990974401946833  ask_hn  True
+40  Ask HN: do you spend more time on HN when your work sucks?  ask_hn  16.837042983817412  21.859665515438287  20.06718057164141  17.385433143055963  ask_hn  True
+41  Ask HN: What was/is your limit for private beta users?  ask_hn  17.31416416239078  20.152095247440222  18.34290469184699  17.385433143055963  ask_hn  True
+42  Ask HN :: Android + GAE + "C-Block" -- Has Google already won the "mobile phone wars"?  ask_hn  17.53601289677788  20.152095247440222  18.34290469184699  17.385433143055963  ask_hn  True
+43  Ask HN: PHP/postgres authentication library/app?  ask_hn  16.837042983817412  20.152095247440222  19.188002731861246  17.385433143055963  ask_hn  True
+44  Ask HN: Lisp / functional programming freelance experiences?  ask_hn  19.558028655878275  22.906443676958858  21.136695087829466  20.08266251361053  ask_hn  True
+45  Ask HN: Where do I start if I want to learn AJAX?  ask_hn  9.628328324781569  12.843292632776503  10.438654758619226  9.293745031392268  ask_hn  True
+46  Ask HN: how do I learn flash?  ask_hn  14.59317849032992  17.87486815486768  15.549114295864515  14.688203772501398  ask_hn  True
+47  Ask HN: Web API's That Allow Commercial Usage?  ask_hn  17.31416416239078  20.629216584386317  18.820025946566652  17.385433143055963  ask_hn  True
+48  Ask HN: Test driven web development  ask_hn  14.59317849032992  18.351989491813775  16.026235550584175  14.688203772501398  ask_hn  True
+49  Ask HN: Intellectual property 101  ask_hn  19.558028655878275  22.906443676958858  21.136695087829466  20.08266251361053  ask_hn  True
+50  Ask HN: Which XP/Vista editions can be legally virtualized?  ask_hn  16.837042983817412  20.152095247440222  18.34290469184699  17.862554397775625  ask_hn  True
+51  Show HN: my story generator using answer-set programming  show_hn  14.59317849032992  15.690176549923521  17.289476995181708  14.688203772501398  show_hn  True
+52  Show HN: My company released a new iphone App  show_hn  12.571162731229526  12.935828120404885  16.663003933947408  11.51385314722717  show_hn  True
+53  Show HN: Backtype's (YC S'08) Twitter tracking lags far behind Tweetmeme  show_hn  16.837042983817412  18.444524979442157  20.083267391164185  17.75340995924751  show_hn  True
+54  Show HN: My blooper reel tribute to other YC S10 applicants  show_hn  16.837042983817412  18.444524979442157  20.083267391164185  17.75340995924751  show_hn  True
+55  Show HN: Weekend Project - Japanese Wordsearch Builder  show_hn  14.59317849032992  15.690176549923521  19.17596772035419  14.211082517781735  show_hn  True
+56  Show HN: My Twitter/Disqus mashup that I threw together. (www.choip.me)  show_hn  19.558028655878275  21.198873408960793  22.87705778714666  19.605541258890867  show_hn  True
+57  Show HN: I finally released that sheet music app I keep yammering about  show_hn  16.837042983817412  18.444524979442157  20.92836543117844  16.9083118883363  show_hn  True
+58  Show HN: Review my startup: Quora, a topic based question and answer site  show_hn  9.151207146208199  11.612843701724529  12.179017457936421  9.661721847583813  show_hn  True
+59  Show HN - My stupidly simple RSS reader  show_hn  19.558028655878275  21.198873408960793  22.87705778714666  19.605541258890867  show_hn  True
+60  Show HN:  My weekend project - minimotivation.com  show_hn  14.59317849032992  15.690176549923521  19.17596772035419  14.211082517781735  show_hn  True
+61  Show HN: The result of donating 8 hours design time  show_hn  19.558028655878275  21.198873408960793  22.87705778714666  19.605541258890867  show_hn  True
+62  Show HN: My Thursday-afternoon project: Notey  show_hn  16.837042983817412  18.444524979442157  21.12466007632241  16.9083118883363  show_hn  True
+63  Show HN: What I did with Notifo  show_hn  19.558028655878275  21.198873408960793  22.87705778714666  19.605541258890867  show_hn  True
+64  Show HN: omgmetoo, our startup project - a free/busy mobile friend tracker  show_hn  14.11605731175655  16.167297886869616  18.330869680339934  15.056180588692945  show_hn  True
+65  Show HN: Helvetireader: A New Flavor  show_hn  17.53601289677788  18.444524979442157  20.92836543117844  16.9083118883363  show_hn  True
+66  Show HN: My first website: A story sharing website for cubicle workers  show_hn  17.31416416239078  18.444524979442157  20.083267391164185  16.9083118883363  show_hn  True
+67  Show HN: create-a-password.appspot.com  show_hn  19.558028655878275  21.198873408960793  22.87705778714666  19.605541258890867  show_hn  True
+68  Show HN: My new app - Penolo: Sketch & Share on Twitter   show_hn  12.094041552656158  13.412949457350978  16.185882679227745  11.990974401946833  show_hn  True
+69  Show HN: A tech talk I just held (websockets, canvas, node.js and redis)  show_hn  14.11605731175655  16.167297886869616  17.76659824990137  14.211082517781735  show_hn  True
+70  Show HN: Please review my new side project [www.Schmeebs.com]  show_hn  9.373055880595295  10.65860102783234  14.065508183108903  8.816623776672605  show_hn  True
+71  Show HN: my echo nest + lastfm + spotify hottt artists site  show_hn  16.837042983817412  18.92164631638825  20.083267391164185  16.9083118883363  show_hn  True
+72  Show HN : I created a PHP Hacker News Clone in 2 hours  show_hn  11.39507163969569  12.935828120404885  16.37074786259093  11.990974401946833  show_hn  True
+73  Show HN: Kraftwerk - Python WSGI deployment tool  show_hn  16.837042983817412  18.92164631638825  20.083267391164185  16.9083118883363  show_hn  True
+74  Show HN: My Hacker News widget for Chumby  show_hn  14.11605731175655  15.690176549923521  18.46556825423739  14.688203772501398  show_hn  True
+75  Show HN: autolib, the last Python library you'll ever need  show_hn  14.59317849032992  16.167297886869616  17.289476995181708  14.211082517781735  show_hn  True
+76  Poll: How long will it take Apple to force Psystar to stop selling the $399 OpenMac?  poll  20.035149834451644  19.968424477908822  19.412419208035047  21.31311146467411  poll  True
+77  Poll: After Startup School - [SF] Hacker Launch Party or [PA] StartupHappyDevHouse  poll  14.11605731175655  14.45972761887155  14.779080925509419  16.763750794476188  poll  True
+78  Poll: Unknown or expired link on YC  poll  19.558028655878275  19.491303140962728  19.412419208035047  22.15820953558532  poll  True
+79  Poll: Should this site be visible to Yahoo, MSN crawlers?  poll  19.558028655878275  19.968424477908822  19.412419208035047  21.31311146467411  poll  True
+80  Poll: Should we have a moderated announcement list for the LinkedIn Group?  poll  20.035149834451644  19.491303140962728  19.412419208035047  21.31311146467411  poll  True
+81  Poll: Are you going to startup school?  poll  17.31416416239078  17.69119738533628  16.61862881205257  19.460980165030755  poll  True
+82  Poll: Preferred medium for reading?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+83  Poll: Best speaker at Startup School 2008?  poll  17.31416416239078  17.214076048390186  16.61862881205257  19.460980165030755  poll  True
+84  Poll: How little would you sell your startup for right now?  poll  19.558028655878275  19.968424477908822  19.412419208035047  22.15820953558532  poll  True
+85  Poll: Are Slide and RockYou overvalued?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+86  Poll: Should PDFs and other documents be auto-Scribd'd?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+87  Poll: Should Xobni have taken Microsoft's offer?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+88  Poll: What should Yahoo have done?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+89  Poll: Do you use a web Adblocker?  poll  20.035149834451644  19.968424477908822  19.88954046275471  21.31311146467411  poll  True
+90  Poll: I use twitter for...  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+91  Poll: Coworking in the South Bay Area  poll  19.558028655878275  19.968424477908822  19.412419208035047  21.31311146467411  poll  True
+92  Poll: Social messaging - which one...  poll  17.31416416239078  16.736954711444092  17.095750066772233  18.615882094119545  poll  True
+93  Poll: Are you a builder or entrepreneur?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+94  Poll: Hacker News (Myers-Briggs) Personality Types  poll  16.837042983817412  16.736954711444092  17.79472007110825  19.093003348839208  poll  True
+95  Poll: Suggestions please, which JavaScript library?   poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+96  Poll: What are you doing full-time?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+97  Poll HN: Who do you support in the 2008 Elections?  poll  16.837042983817412  18.444524979442157  18.34290469184699  19.093003348839208  poll  True
+98  Poll HN: Physical Keyboard or On-Screen Keyboard?  show_hn  14.11605731175655  15.690176549923521  16.503356805303838  15.91865272356498  poll  False
+99  Poll: What continent are you in?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
+100  Poll: Would you have dodged the Vietnam draft?  poll  22.279014327939137  22.245651570481364  22.206209604017523  24.01034083522868  poll  True
