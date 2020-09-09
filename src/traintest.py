@@ -1,6 +1,5 @@
 import pandas as pd
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 import nltk
 import string
 import os
